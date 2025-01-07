@@ -1,0 +1,23 @@
+# Keybindings
+keybind = alt+\=new_split:right
+keybind = alt+-=new_split:down
+keybind = alt+x=close_surface
+keybind = alt+h=goto_split:left
+keybind = alt+l=goto_split:right
+keybind = alt+k=goto_split:top
+keybind = alt+j=goto_split:bottom
+
+# Config
+theme = "carbonfox"
+gtk-titlebar = false
+#title = " "
+macos-titlebar-proxy-icon = hidden
+
+window-padding-x = 12
+macos-icon = custom-style
+macos-icon-ghost-color = BCBEC4
+macos-icon-screen-color = 1E1F22
+
+unfocused-split-opacity = .50
+
+unfocused-split-fill = #808080
