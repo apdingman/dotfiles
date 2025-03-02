@@ -9,12 +9,13 @@ return {
     'williamboman/mason-lspconfig.nvim',
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "ruff" }
+        ensure_installed = { "ruff", "gopls" } -- Added "gopls" here
       })
     end,
   },
   {
     'neovim/nvim-lspconfig',
+    dependencies = { 'hrsh7th/cmp-nvim-lsp' }, -- Ensure cmp-nvim-lsp is a dependency for better integration
     config = function()
       local lspconfig = require('lspconfig')
 
@@ -33,11 +34,34 @@ return {
         end,
         settings = {
           ruff = {
-            -- Optional settings for Ruff
             lineLength = 88,
             lint = {
               select = { "E", "F" },
             },
+          },
+        },
+      })
+
+      -- gopls setup for Go development
+      lspconfig.gopls.setup({
+        on_attach = function(client, bufnr)
+          local opts = { noremap = true, silent = true, buffer = bufnr }
+
+          -- Key mappings for LSP functionality
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+          vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+        end,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+              shadow = true,
+            },
+            staticcheck = true,
           },
         },
       })

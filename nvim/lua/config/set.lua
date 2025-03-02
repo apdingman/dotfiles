@@ -2,8 +2,12 @@ vim.opt.clipboard = 'unnamedplus' -- use system keyboard for yank
 vim.opt.nu = true                 -- set line numbers -- set line numbers
 vim.opt.number = true            -- Enables absolute line numbers on the current line
 vim.opt.relativenumber = true     -- Enables relative line numbers
-vim.cmd("colorscheme nightfox")
-
+vim.cmd("colorscheme dracula")
+require("oil").setup({
+delete_to_trash = true
+}
+)
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- set tab size to 2 spaces
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -38,18 +42,8 @@ vim.keymap.set('v', '<Up>', '<Nop>', { silent = true })
 vim.keymap.set('v', '<Down>', '<Nop>', { silent = true })
 vim.keymap.set('v', '<Left>', '<Nop>', { silent = true })
 vim.keymap.set('v', '<Right>', '<Nop>', { silent = true })
+vim.api.nvim_set_hl(0, "Visual", { bg = "#988049", fg = "#ffffff" })
 
-vim.keymap.set('n', '<leader>=', ':Neotree toggle<CR>', { silent = true })
-vim.keymap.set('v', '<leader>=', ':Neotree toggle<CR>', { silent = true })
+-- My custom
+vim.keymap.set('n', '<leader>=', 'i- [ ]<Esc>')
 
-vim.keymap.set('n', '<leader>e', ':Neotree reveal<CR>', { silent = true })
-vim.keymap.set('v', '<leader>e', ':Neotree reveal<CR>', { silent = true })
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        -- Check if no files are opened on startup
-        if vim.fn.argc() == 0 then
-            vim.cmd("Neotree show")
-        end
-    end,
-})
