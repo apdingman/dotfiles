@@ -4,7 +4,7 @@ vim.opt.number = true            -- Enables absolute line numbers on the current
 vim.opt.relativenumber = true     -- Enables relative line numbers
 vim.cmd("colorscheme dracula")
 require("oil").setup({
-delete_to_trash = true
+delete_to_trash = true,
 }
 )
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -46,4 +46,5 @@ vim.api.nvim_set_hl(0, "Visual", { bg = "#988049", fg = "#ffffff" })
 
 -- My custom
 vim.keymap.set('n', '<leader>=', 'i- [ ]<Esc>')
-
+vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Open Markdown Preview" })
+vim.keymap.set("n", "<leader>t", ":enew | setlocal buftype=nofile bufhidden=hide noswapfile<CR>", { noremap = true, silent = true })

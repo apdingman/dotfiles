@@ -9,7 +9,8 @@ return {
     'williamboman/mason-lspconfig.nvim',
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "ruff", "gopls" } -- Added "gopls" here
+        ensure_installed = { "ruff", "gopls", "ts_ls" },
+        automatic_installation = true,
       })
     end,
   },
@@ -65,6 +66,20 @@ return {
           },
         },
       })
+
+    lspconfig.ts_ls.setup({
+      -- Optional: Customize your settings here
+      on_attach = function(client, bufnr)
+        -- Add your custom keymaps here if needed
+        local opts = { buffer = bufnr, noremap = true, silent = true }
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+      end,
+      capabilities = require('cmp_nvim_lsp').default_capabilities(), -- If using nvim-cmp
+      filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+      root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+    })
     end,
   },
   {

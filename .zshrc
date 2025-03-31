@@ -1,12 +1,11 @@
 # Aliases
-alias v="nvim"
-alias sn="cd ~/Google\ Drive/My\ Drive/notes"
-alias yek="cd ~/yek"
-alias dn="~/daily_note.sh"
-alias ob="cd ~/Library/Mobile\ Documents/iCloud\~md\~obsidian"
-alias notes="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/nvim-notes && nvim ."
-alias todo="v ~/Library/Mobile\ Documents/com~apple~CloudDocs/nvim-notes/weeklys && nvim"
-alias src="cd ~/src"
+alias v='nvim'
+alias sn='cd ~/Google\ Drive/My\ Drive/notes'
+alias yek='cd ~/yek'
+alias dn='~/daily_note.sh'
+alias notes='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/nvim-notes/weeklys && nvim "$(ls -1 | tail -n 1)"'
+alias dot='cd ~/src/dotfiles && nvim .'
+alias src='cd ~/src' 
 set -o vi
 
 # Go Setup
@@ -22,6 +21,6 @@ setopt APPEND_HISTORY      # Append commands to history file immediately
 setopt SHARE_HISTORY       # Share history across all open sessions
 setopt HIST_IGNORE_DUPS    # Ignore duplicate commands in history
 setopt HIST_IGNORE_SPACE   # Ignore commands that start with a space
-alias st="wezterm cli set-tab-title"
+alias st='wezterm cli set-tab-title'
 
-. "$HOME/.local/bin/env"
+#. '$HOME/.local/bin/env'
