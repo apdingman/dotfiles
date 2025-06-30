@@ -2,7 +2,6 @@ vim.opt.clipboard = 'unnamedplus' -- use system keyboard for yank
 vim.opt.nu = true                 -- set line numbers -- set line numbers
 vim.opt.number = true            -- Enables absolute line numbers on the current line
 vim.opt.relativenumber = true     -- Enables relative line numbers
-vim.cmd("colorscheme dracula")
 require("oil").setup({
 delete_to_trash = true,
 }
@@ -48,3 +47,32 @@ vim.api.nvim_set_hl(0, "Visual", { bg = "#988049", fg = "#ffffff" })
 vim.keymap.set('n', '<leader>=', 'i- [ ]<Esc>')
 vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Open Markdown Preview" })
 vim.keymap.set("n", "<leader>t", ":enew | setlocal buftype=nofile bufhidden=hide noswapfile<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>", { desc = "Git Diffview" })
+vim.keymap.set("n", "<leader>gq", ":DiffviewClose<CR>", { desc = "Close Diffview" })
+
+require("config.highlights")
+
+vim.keymap.set("n", "d_", '"_d', { noremap = true, silent = true })
+vim.keymap.set("v", "d_", '"_d', { noremap = true, silent = true })
+
+require("config.auto_update")
+
+if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
+  vim.opt.title = true
+  vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "OilEnter",
+    callback = function()
+      vim.cmd("redraw")  -- Force Neovim to re-evaluate &titlestring
+    end,
+  })
+end
+
+-- In your lua/config/keymaps.lua or similar:
+vim.keymap.set("n", "<leader>sd", "<cmd>Telescope diagnostics<CR>", { desc = "Search diagnostics" })
+
+vim.cmd [[
+  highlight LineNr guifg=#888888
+  highlight CursorLineNr guifg=#ffffff gui=bold
+]]

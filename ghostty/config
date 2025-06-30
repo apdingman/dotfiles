@@ -8,7 +8,7 @@ keybind = alt+k=goto_split:top
 keybind = alt+j=goto_split:bottom
 
 # Config
-theme = "dracula"
+theme = "everblush"
 gtk-titlebar = false
 #title = " "
 macos-titlebar-proxy-icon = hidden
@@ -22,5 +22,6 @@ selection-background = 988049
 #unfocused-split-opacity = .50
 #unfocused-split-fill = #808080
 
-font-size = 12
-background-opacity = 0.95
+font-size = 14
+#background-opacity = 0.95
+split-divider-color = FFFFFF
